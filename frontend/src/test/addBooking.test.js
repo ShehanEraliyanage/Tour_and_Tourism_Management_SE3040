@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Login from "../pages/Login";
+import UserBooking from "../pages/UserBookings";
 import { BrowserRouter as Router } from "react-router-dom";
 
 describe("Form works as expected", () => {
@@ -11,14 +11,14 @@ describe("Form works as expected", () => {
     // );
     render(
       <Router>
-        <Login />
+        <UserBooking />
       </Router>
     );
 
-    const email = screen.getByText("email");
-    const password = screen.getByText("password");
-    fireEvent.change(email, { target: { value: "John Doe" } });
-    fireEvent.change(password, { target: { value: "John123" } });
+    const guestSize = screen.getByText("guestSize");
+    const phone = screen.getByText("phone");
+    fireEvent.change(phone, { target: { value: "0760986453" } });
+    fireEvent.change(guestSize, { target: { value: "5" } });
 
     const submitButton = screen.getByText("submit");
     fireEvent.click(submitButton);

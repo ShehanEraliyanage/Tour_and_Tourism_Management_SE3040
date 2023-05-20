@@ -15,10 +15,10 @@ describe("Form works as expected", () => {
       </Router>
     );
 
-    const email = screen.getByText("email");
-    const password = screen.getByText("password");
+    const title = screen.getByText("title");
+    const geust = screen.getByText("geust");
     fireEvent.change(title, { target: { value: "John Doe" } });
-    fireEvent.change(geust, { target: { value: "John123" } });
+    fireEvent.change(geust, { target: { value: 2 } });
 
     const submitButton = screen.getByText("submit");
     fireEvent.click(submitButton);

@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Login from "../pages/Login";
+import AddVehicle from "../pages/Add-Vehicle";
 import { BrowserRouter as Router } from "react-router-dom";
 
 describe("Form works as expected", () => {
@@ -11,14 +11,14 @@ describe("Form works as expected", () => {
     // );
     render(
       <Router>
-        <Login />
+        <AddVehicle />
       </Router>
     );
 
-    const email = screen.getByText("email");
-    const password = screen.getByText("password");
-    fireEvent.change(email, { target: { value: "John Doe" } });
-    fireEvent.change(password, { target: { value: "John123" } });
+    const number = screen.getByText("number");
+    const type = screen.getByText("type");
+    fireEvent.change(number, { target: { value: "BA-3487" } });
+    fireEvent.change(type, { target: { value: "Car" } });
 
     const submitButton = screen.getByText("submit");
     fireEvent.click(submitButton);
