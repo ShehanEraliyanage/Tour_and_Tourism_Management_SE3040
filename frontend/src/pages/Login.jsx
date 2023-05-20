@@ -100,7 +100,10 @@ const Login = () => {
                       placeholder="email"
                       required
                       id="email"
+                      name="email"
                       onChange={handleChange}
+                      label="email"
+                      aria-labelledby="email"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -109,13 +112,18 @@ const Login = () => {
                       placeholder="password"
                       required
                       id="password"
+                      name="password"
                       onChange={handleChange}
+                      label="password"
+                      aria-labelledby="password"
                     />
                   </FormGroup>
                   <Button
                     className="btn secondary__btn auth__btn"
                     type="submit"
                     onClick={handleClick}
+                    name="submit"
+                    label="submit"
                   >
                     {" "}
                     Login
