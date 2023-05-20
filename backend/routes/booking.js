@@ -21,7 +21,7 @@ router.get("/getBook", getSingleBooking);
 router.post("/", createBooking);
 router.get("/:id", verifyUser, getBooking);
 router.get("/", getAllBooking);
-router.put("/:id", updatedBooking);
-router.delete("/:id", deleteBooking);
+router.post("/update", updatedBooking);
+router.post("/delete", deleteBooking);
 
 export default router;
