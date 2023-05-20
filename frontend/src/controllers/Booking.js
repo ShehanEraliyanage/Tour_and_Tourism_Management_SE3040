@@ -7,6 +7,10 @@ export const updateBooking = async (details) => {
   const { data } = await axios.post(BASE_URL + "booking/update/", details);
   return data;
 };
+export const deleteBooking = async (id) => {
+  const { data } = await axios.post(BASE_URL + "booking/delete/", { id, id });
+  return data;
+};
 
 export const getAllBooking = async () => {
   const { data } = await axios.get(BASE_URL + "booking/");
@@ -26,9 +30,12 @@ export const getAllComletedBookings = async () => {
   return data;
 };
 
-export const getSingleBooking = async (id) => {
+export const getSingleBooking = async (bookid) => {
+  console.log(bookid);
   const { data } = await axios.get(BASE_URL + "booking/getBook/", {
-    id: id,
+    id: bookid,
   });
+  console.log(data);
+
   return data;
 };

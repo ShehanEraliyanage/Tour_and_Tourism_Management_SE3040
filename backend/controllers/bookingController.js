@@ -42,46 +42,43 @@ export const getAllBooking = async (req, res) => {
 };
 
 export const updatedBooking = async (req, res) => {
-  const id = req.params.id;
-
   try {
-    const updateTour = await Booking.findByIdAndUpdate(
-      id,
+    const tour = await Booking.findOneAndUpdate(
       {
-        $set: req.body,
+        _id: req.body._id,
       },
-      { new: true }
+      {
+        _id: req.body.id,
+        fullName: req.body.fullName,
+        guestSize: req.body.guestSize,
+        guideName: req.body.guideName,
+        phone: req.body.phone,
+        tourName: req.body.tourName,
+      },
+      {
+        new: true,
+      }
     );
 
-    res.status(200).json({
-      success: true,
-      message: "Successfully updated Booking",
-      data: updateTour,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Unable to update Booking",
-    });
-  }
-};
-export const deleteBooking = async (req, res) => {
-  const id = req.params.id;
-  try {
-    if (id) {
-      await Booking.findByIdAndDelete(id);
-
-      res.status(200).json({
-        success: true,
-        message: "Successfully Deleted Booking",
+    if (user) {
+      res.send({
+        status: 200,
+        user: user,
+      });
+    } else {
+      res.send({
+        status: 500,
+        user: user,
       });
     }
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      message: "Unable to delete Booking",
-    });
+  } catch (error) {
+    console.log(error.message);
   }
+};
+
+export const deleteBooking = async (req, res) => {
+  const book = await Booking.findOneAndDelete({ _id: req.body.id });
+  res.send(book);
 };
 
 export const getAllpendingBookings = async (req, res) => {
@@ -98,6 +95,9 @@ export const getAllComletedBookings = async (req, res) => {
 };
 
 export const getSingleBooking = async (req, res) => {
+  console.log("id");
+  console.log(req.body.id);
   const booking = await Booking.findOne({ userId: req.body.id });
+  console.log(booking);
   res.send(booking);
 };
