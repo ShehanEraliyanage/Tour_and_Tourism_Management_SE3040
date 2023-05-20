@@ -22,6 +22,7 @@ import ManageBookingsTourist from "../pages/Manage-Tourist-Booking";
 import UserProfile from "../pages/UserProfile";
 import DriverTouronGiing from "../pages/Driver-Tour-ongoing";
 import DriverTourComplete from "../pages/Driver-Tour-Complete";
+import UserBooking from "../pages/UserBookings";
 
 import { ThankYou } from "../pages/ThankYou";
 
@@ -48,6 +49,7 @@ const Routers = () => {
       <Route path="/driver-tour-manage" element={<DriverTourView />} />
       <Route path="/driver-tour-ongoing" element={<DriverTouronGiing />} />
       <Route path="/driver-tour-complete" element={<DriverTourComplete />} />
+      <Route path="/userBook" element={<UserBooking />} />
       <Route
         path="/tourist-manage-booking"
         element={<ManageBookingsTourist />}

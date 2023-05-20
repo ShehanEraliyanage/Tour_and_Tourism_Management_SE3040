@@ -15,7 +15,6 @@ export const getSingleVehicle = async (id) => {
   return data;
 };
 
-
 export const updateVehicle = async (details) => {
   console.log(details);
   const { data } = await axios.post(BASE_URL + "vehicle/update/", details);

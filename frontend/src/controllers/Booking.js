@@ -25,3 +25,10 @@ export const getAllComletedBookings = async () => {
   const { data } = await axios.get(BASE_URL + "booking/completed/");
   return data;
 };
+
+export const getSingleBooking = async (id) => {
+  const { data } = await axios.get(BASE_URL + "booking/getBook/", {
+    id: id,
+  });
+  return data;
+};

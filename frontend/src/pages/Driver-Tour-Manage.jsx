@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import {
   Table,
   Button,
@@ -10,6 +11,7 @@ import {
 } from "reactstrap";
 import "../styles/manage-driver.css";
 import "../styles/home.css";
+import { reactBaseURL } from "../utils/config";
 
 import { AuthContext } from "../context/AuthContext";
 
@@ -65,8 +67,47 @@ const DriverTourView = () => {
     }));
   };
 
-  const handleSave = () => {
-    console.log(newVehicle);
+  const handleSave = async () => {
+    console.log("sasasasaas");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to change Vehicle details!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, update it!",
+    }).then((res) => {
+      if (res.value === true) {
+        updateVehicle({
+          _id: newVehicle._id,
+          number: newVehicle.number,
+          type: newVehicle.type,
+          seatCapacity: newVehicle.seatCapacity,
+          userID: newVehicle.userID,
+          driverName: newVehicle.driverName,
+        }).then((res) => {
+          if (res) {
+            Swal.fire({
+              icon: "success",
+              title: "Updated!",
+              text: "Vehicle details updated successfully!",
+              confirmButtonText: "OK",
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: "Something went wrong!",
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
+          }
+        });
+      }
+    });
+    setTimeout(() => {
+      window.location.replace(reactBaseURL + "/driver-tour-manage");
+    }, 2050);
   };
 
   return (
@@ -150,7 +191,7 @@ const DriverTourView = () => {
                 <th>Full Name</th>
                 <th>Guest Size</th>
                 <th>Number</th>
-                <th>Vehicle ID</th>
+                <th>Vehicle number</th>
                 <th>Actions</th>
               </tr>
             </thead>

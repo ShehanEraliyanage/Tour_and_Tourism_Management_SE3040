@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-
+import Swal from "sweetalert2";
 import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/login.css";
@@ -28,10 +28,30 @@ const Register = () => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  console.log(credentials)
+  console.log(credentials);
 
   const handleClick = async (e) => {
     e.preventDefault();
+
+    if (
+      !credentials.username ||
+      !credentials.email ||
+      !credentials.password ||
+      !credentials.role
+    ){
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please fill all the fields!",
+      });
+  }else if(!credentials.email.includes("@")){
+    return Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Please enter a valid email!",
+    });
+  }
+
     try {
       const res = await fetch(`${BASE_URL}auth/register`, {
         method: "POST",
@@ -75,7 +95,9 @@ const Register = () => {
                       required
                       className="select"
                     >
-                      <option value="" disabled selected>Select User Type</option>
+                      <option value="" disabled selected>
+                        Select User Type
+                      </option>
                       <option value="user">User</option>
                       <option value="hotel">Hotel</option>
                       <option value="tourGuide">Tour Guide</option>

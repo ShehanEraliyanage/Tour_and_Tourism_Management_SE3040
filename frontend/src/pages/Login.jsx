@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import Swal from "sweetalert2";
 
 import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,6 +28,13 @@ const Login = () => {
   const handleClick = async (e) => {
     e.preventDefault();
 
+    if (!credentials.email || !credentials.password)
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please fill all the fields!",
+      });
+
     dispatch({ type: "LOGIN_START" });
 
     try {
@@ -45,7 +53,11 @@ const Login = () => {
 
       dispatch({ type: "LOGIN_SUCCESS", payload: result.data });
       console.log(result.role);
-
+      Swal.fire({
+        title: "Please Wait",
+        html: "We are logging you in.",
+        allowOutsideClick: false,
+      });
       const user = result.role;
       if (user === "user") {
         navigate("/");
@@ -58,7 +70,12 @@ const Login = () => {
       }
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.message });
-      alert(err.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err.message,
+      });
+      // alert(err.message);
     }
   };
   return (

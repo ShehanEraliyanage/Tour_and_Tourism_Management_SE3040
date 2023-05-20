@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
 import { updatedUser } from "../controllers/User";
@@ -15,6 +16,10 @@ const UserProfile = () => {
   const [email, setEmail] = useState(user.email);
   const [hotelName, setHotelName] = useState(user.hotelname);
   const [hotelLocation, setHotelLocation] = useState(user.hotellocation);
+  const [showBookingsModal, setShowBookingsModal] = useState(false);
+  const [bookingData, setBookingData] = useState([]);
+
+  console.log(user.username);
 
   useEffect(() => {
     setUserDetails(user);
@@ -68,9 +73,15 @@ const UserProfile = () => {
     });
   };
 
-  // const handleChange = (e) => {
-  //   setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
-  // };
+  const handleBookingsClick = () => {
+    setShowBookingsModal(true);
+  };
+
+  const fetchBookingData = async () => {};
+
+  const closeModal = () => {
+    setShowBookingsModal(false);
+  };
 
   return (
     <div className="profile-container">
@@ -128,6 +139,12 @@ const UserProfile = () => {
           <button type="button" onClick={handleEditClick}>
             Edit
           </button>
+        )}
+
+        {user.username === "shehan" && (
+          <Link to="/userBook">
+            <button type="button">Bookings</button>
+          </Link>
         )}
       </form>
     </div>

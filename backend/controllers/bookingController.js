@@ -96,3 +96,8 @@ export const getAllComletedBookings = async (req, res) => {
   const booking = await Booking.find({ status: "completed" });
   res.send(booking);
 };
+
+export const getSingleBooking = async (req, res) => {
+  const booking = await Booking.findOne({ userId: req.body.id });
+  res.send(booking);
+};
