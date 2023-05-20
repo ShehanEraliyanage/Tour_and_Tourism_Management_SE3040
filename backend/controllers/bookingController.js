@@ -41,31 +41,6 @@ export const getAllBooking = async (req, res) => {
   }
 };
 
-// export const updatedBooking = async (req, res) => {
-//   const id = req.params.id;
-
-//   try {
-//     const updateTour = await Booking.findByIdAndUpdate(
-//       id,
-//       {
-//         $set: req.body,
-//       },
-//       { new: true }
-//     );
-
-//     res.status(200).json({
-//       success: true,
-//       message: "Successfully updated Booking",
-//       data: updateTour,
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: "Unable to update Booking",
-//     });
-//   }
-// };
-
 export const updatedBooking = async (req, res) => {
   try {
     const tour = await Booking.findOneAndUpdate(
@@ -100,24 +75,7 @@ export const updatedBooking = async (req, res) => {
     console.log(error.message);
   }
 };
-// export const deleteBooking = async (req, res) => {
-//   const id = req.params.id;
-//   try {
-//     if (id) {
-//       await Booking.findByIdAndDelete(id);
 
-//       res.status(200).json({
-//         success: true,
-//         message: "Successfully Deleted Booking",
-//       });
-//     }
-//   } catch (err) {
-//     res.status(500).json({
-//       success: false,
-//       message: "Unable to delete Booking",
-//     });
-//   }
-// };
 export const deleteBooking = async (req, res) => {
   const book = await Booking.findOneAndDelete({ _id: req.body.id });
   res.send(book);
